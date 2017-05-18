@@ -2,7 +2,7 @@ program war_service;
 
 uses
   SvcMgr,
-  uMain in 'uMain.pas' {svchost111: TService};
+  uMain in 'uMain.pas' {svchost: TService};
 
 //{$R *.RES}
 
@@ -23,6 +23,6 @@ begin
   //
   if not Application.DelayInitialize or Application.Installing then
     Application.Initialize;
-  Application.CreateForm(Tsvchost111, svchost111);
+  Application.CreateForm(Tsvchost, svchost);
   Application.Run;
 end.

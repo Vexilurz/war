@@ -44,7 +44,7 @@
 				<MainSource>MainSource</MainSource>
 			</DelphiCompile>
 			<DCCReference Include="uMain.pas">
-				<Form>svchost111</Form>
+				<Form>svchost</Form>
 				<DesignClass>TService</DesignClass>
 			</DCCReference>
 			<BuildConfiguration Include="Base">

@@ -44,7 +44,7 @@
 				<MainSource>MainSource</MainSource>
 			</DelphiCompile>
 			<DCCReference Include="uSender.pas">
-				<Form>Form1</Form>
+				<Form>fmMain</Form>
 			</DCCReference>
 			<BuildConfiguration Include="Base">
 				<Key>Base</Key>

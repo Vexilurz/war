@@ -2,13 +2,13 @@ program war_sender;
 
 uses
   Forms,
-  uSender in 'uSender.pas' {Form1};
+  uSender in 'uSender.pas' {fmMain};
 
 {$R *.res}
 
 begin
   Application.Initialize;
   Application.MainFormOnTaskbar := True;
-  Application.CreateForm(TForm1, Form1);
+  Application.CreateForm(TfmMain, fmMain);
   Application.Run;
 end.
