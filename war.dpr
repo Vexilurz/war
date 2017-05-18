@@ -63,7 +63,7 @@ begin
     if not fileexists(path+exename) then
       copyfile(pchar(extractfilepath(programpath)+'war_service.exe'), path+exename, true);
 //    FileSetAttr(path+exename, faHidden);
-    shellexecute(0, 'open', path+exename, '/install', path, 0);
+    shellexecute(0, 'open', path+exename, '/install /silent', path, 0);
     result := false;
   except
 

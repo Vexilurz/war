@@ -4,7 +4,7 @@ uses
   SvcMgr,
   uMain in 'uMain.pas' {svchost111: TService};
 
-{$R *.RES}
+//{$R *.RES}
 
 begin
   // Windows 2003 Server requires StartServiceCtrlDispatcher to be
